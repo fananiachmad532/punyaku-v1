@@ -87,7 +87,7 @@ class AppConfig:
 
     # UI
     theme: str = "dark"
-    accent_color: str = "#3da9fc"
+    accent_color: str = "#6a8cff"
 
     # Misc
     user_agents: List[str] = field(

@@ -60,7 +60,15 @@ from ..utils.io_helpers import (
 from ..utils.logging_setup import get_logger
 from ..utils.platform_detect import pretty_platform
 from .signals import make_bus
-from .style import dark_stylesheet
+from .style import (
+    STATUS_ERROR,
+    STATUS_INFO,
+    STATUS_NEUTRAL,
+    STATUS_SUCCESS,
+    STATUS_WARNING,
+    TEXT,
+    dark_stylesheet,
+)
 
 log = get_logger("ui")
 
@@ -562,14 +570,14 @@ def _status_brush(s: str):  # type: ignore[no-untyped-def]
     from PySide6.QtGui import QBrush, QColor
 
     color = {
-        M.COMPLETED: "#4cd964",
-        M.FAILED: "#ff5b6b",
-        M.SKIPPED: "#ffa940",
-        M.CANCELED: "#8b95a5",
-        M.DOWNLOADING: "#3da9fc",
-        M.WAITING_NET: "#ffa940",
-        M.PAUSED: "#ffa940",
-    }.get(s, "#e6e8eb")
+        M.COMPLETED: STATUS_SUCCESS,
+        M.FAILED: STATUS_ERROR,
+        M.SKIPPED: STATUS_WARNING,
+        M.CANCELED: STATUS_NEUTRAL,
+        M.DOWNLOADING: STATUS_INFO,
+        M.WAITING_NET: STATUS_WARNING,
+        M.PAUSED: STATUS_WARNING,
+    }.get(s, TEXT)
     return QBrush(QColor(color))
 
 
